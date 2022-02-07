@@ -1,6 +1,6 @@
 # polrschd
 Python script for predicting NOAA POES GAC transmissions.  
-The script will access the public NOAA schedule file at https://noaasis.noaa.gov/cemscs/polrschd.txt and parse event related to POES GAC (NOAA-15, NOAA-18, NOAA-19). It will then display the time at which a satellite begins and ends its GAC transmission, as well as the frequency, polarization, and elevation of the satellite.
+The script will access the public NOAA schedule file at https://noaasis.noaa.gov/cemscs/polrschd.txt and parse event related to POES GAC (NOAA-15, NOAA-18, NOAA-19). It will then display the UTC time and date at which a satellite begins and ends its GAC transmission, as well as the frequency, polarization, and elevation of the satellite.
 
 ![thumbnail](https://github.com/sgcderek/polrschd/blob/main/thumbnail.jpeg?raw=true)
 
