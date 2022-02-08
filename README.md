@@ -11,4 +11,4 @@ The script uses urllib, datetime and pyorbital. Only pyorbital is a non-default 
 
 ## Usage
 Very basic usage for now; open polrschd.py3 and change the four parameters at the beginning of the file (input your latitude, longitude, altitude ASL and minimum satellite elevation).  
-Once configured, you can run the script.
+Once configured, you can run the script and get a list of GAC transmissions available for your area. Make sure to then check the full pass with your normal prediction app (such as gpredict, Look4sat, etc.)
