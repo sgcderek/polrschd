@@ -13,7 +13,7 @@ minElevation = -2 # Minimum elevation of the GAC event (can be negative)
 ########################################################################
 
 
-import urllib.request
+import urllib.request, os, time
 from datetime import datetime
 from pyorbital.orbital import Orbital
 
@@ -30,6 +30,8 @@ class bcolors:
 	UNDERLINE = '\033[4m'
 
 polrschdURL = "https://noaasis.noaa.gov/cemscs/polrschd.txt" # polrschd.txt URL
+polrschdLocal = "polrschd.txt"
+polrschdExpire = 260000
 
 print(f"{bcolors.OKCYAN}{bcolors.BOLD}Calculating GAC events for following conditions;{bcolors.ENDC}")
 print(f"{bcolors.OKCYAN}Receiver latitude:  ",yourLat,"˚")
@@ -41,10 +43,19 @@ orbitalNOAA15 = Orbital("NOAA-15")
 orbitalNOAA18 = Orbital("NOAA-18")
 orbitalNOAA19 = Orbital("NOAA-19")
 
-print("Acessing",polrschdURL)
-for line in urllib.request.urlopen(polrschdURL): # download txt, read each line
-	text = line.decode('utf-8') # decode as utf-8
-	text = text[:-1] # strip newline
+# Use local file if recent enough (to reduce number of requests)
+if (os.path.isfile(polrschdLocal)):
+	if (time.time() - os.path.getmtime(polrschdLocal)) > polrschdExpire:
+		print("Local file expired, will download")
+		urllib.request.urlretrieve(polrschdURL, polrschdLocal)
+	else:
+		print("Using local file")
+else:
+	print("Local file not found, will download")
+	urllib.request.urlretrieve(polrschdURL, polrschdLocal)
+
+for line in open(polrschdLocal, 'r'): # open txt, read each line
+	text = line[:-1] # strip newline
 	date = text[0:17] # get date from line
 	dateParsed = datetime.strptime(date, '%Y/%j/%H:%M:%S') # parse date from weird format YYYY/DDD/HH:MM:SS
 	satID = text[23:25] # get satellite number from line
