@@ -1,21 +1,22 @@
+import urllib.request, os, time
+from datetime import datetime
+from dateutil import tz
+from pyorbital.orbital import Orbital
 
 ########################################################################
 ########################### PREDICT SETTINGS ###########################
 ########################### (change  these!) ###########################
 ########################################################################
 
-yourLat = 78.22   # Your latitude
-yourLon = 15.39   # Your longitude
-yourAlt = 400     # Your altitude (meters above sea level)
-minElevation = -2 # Minimum elevation of the GAC event (can be negative)
+yourLat = 41.42   # Your latitude
+yourLon = -92.22   # Your longitude
+yourAlt = 230     # Your altitude (meters above sea level)
+minElevation = 0 # Minimum elevation of the GAC event (can be negative)
+utcTime = tz.gettz('UTC') # UTC timezone
+localTime = tz.gettz('UTC') # Your local timezone
 
 ########################################################################
 ########################################################################
-
-
-import urllib.request, os, time
-from datetime import datetime
-from pyorbital.orbital import Orbital
 
 # https://code.it4i.cz/blender/blender-embree3/-/blob/sculpt25/tools/bcolors.py
 class bcolors:
@@ -57,7 +58,9 @@ else:
 for line in open(polrschdLocal, 'r'): # open txt, read each line
 	text = line[:-1] # strip newline
 	date = text[0:17] # get date from line
-	dateParsed = datetime.strptime(date, '%Y/%j/%H:%M:%S') # parse date from weird format YYYY/DDD/HH:MM:SS
+	utc = datetime.strptime(date, '%Y/%j/%H:%M:%S') # parse date from weird format YYYY/DDD/HH:MM:SS
+	utc = utc.replace(tzinfo=utcTime) # set timezone to UTC
+	dateParsed = utc.astimezone(localTime) # convert to local time
 	satID = text[23:25] # get satellite number from line
 	
 	# parse satellite number ID into name
