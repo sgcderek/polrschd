@@ -6,9 +6,21 @@ GAC transmissions can be subsequently demodulated and decoded by [LeanHRPT-Demod
 
 ![thumbnail](https://github.com/sgcderek/polrschd/blob/main/thumbnail.jpeg?raw=true)
 
-## Requirements
-The script uses urllib, datetime and pyorbital. Only pyorbital is a non-default library and can be installed with pip
+## Installation
+
+Clone repository
+```bash
+git clone https://github.com/horsaen/polrschd.git && cd polrschd
+```
+
+Install dependencies
+```bash
+pip3 install -r requirements.txt
+```
 
 ## Usage
-Very basic usage for now; open polrschd.py and change the four parameters at the beginning of the file (input your latitude, longitude, altitude ASL, minimum satellite elevation, and timezone (optional)).  
-Once configured, you can run the script and get a list of GAC transmissions available for your area. Make sure to then check the full pass with your normal prediction app (such as gpredict, Look4sat, etc.)
+
+Edit [main.py](main.py) to set required parameters, then simply run the script
+```bash
+python3 main.py
+```
