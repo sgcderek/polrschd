@@ -13,7 +13,7 @@ yourLon = -92.22   # Your longitude
 yourAlt = 230     # Your altitude (meters above sea level)
 minElevation = 0 # Minimum elevation of the GAC event (can be negative)
 utcTime = tz.gettz('UTC') # UTC timezone
-localTime = tz.gettz('UTC') # Your local timezone
+localTime = tz.gettz('UTC') # Your local timezone(as abbreviation)
 
 ########################################################################
 ########################################################################
